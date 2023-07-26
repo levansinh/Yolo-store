@@ -1,0 +1,30 @@
+.wrapper {
+    font-size: 16px;
+    padding: 9px 16px;
+    min-width: 100px;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid transparent;
+    + .wrapper {
+        margin-left: 16px;
+    }
+}
+
+.primary {
+    background: #fff;
+    color: #4267b2 ;
+    border-color: #4267b2;
+    &:hover {
+        background-color: #4267b2;
+        color: white;
+    }
+}
+.small {
+    min-width: 88px;
+    padding: 4px 16px;
+}
+.large {
+    padding: 14px 16px;
+    min-width: 140px;
+}

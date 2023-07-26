@@ -1,0 +1,59 @@
+.catalog {
+  @include flex(flex-start, flex-start);
+
+  @include tablet {
+    flex-direction: column;
+  }
+  &__fillter {
+    width: 20%;
+    @include tablet {
+      width: max-content;
+      height: 100vh;
+      background-color: $main-bg;
+      padding: 1rem;
+      position: fixed;
+      top: $header-tablet-height;
+      left: 0;
+      z-index: 90;
+      box-shadow: $box-shadow;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    
+    &__toggle {
+      display: none;
+      @include tablet {
+        display: block;
+      }
+    }
+
+    &.active {
+      transform: translateX(0);
+    }
+    &__widget {
+      margin-bottom: 20px;
+      &__title {
+        font-weight: bold;
+        font-size: 17px;
+      }
+      &__content {
+        font-size: 14px;
+        color: #8d8d8d;
+        margin-top: 10px;
+        margin-left: 5px;
+      }
+    }
+  }
+  &__content {
+    flex-grow: 1;
+    @include tablet {
+      width: 100%;
+    }
+  }
+  .catalog__filter__close{
+    display: none;
+    @include tablet {
+        display: block;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+.footer {
+    box-shadow: $box-shadow;
+    padding: 40px;
+    .box {
+        @include mobile {
+           
+        }
+    }
+ 
+    &__tille{
+        font-size: 20px ;
+        @include tablet {
+            font-size: 18px ;
+        }
+        @include mobile {
+            font-size: 16px ;
+        }
+    }
+    &__content{
+        font-size: 1.3rem ;
+    }
+}
