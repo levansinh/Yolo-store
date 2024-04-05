@@ -1,22 +1,20 @@
 import instance from "../configs/config";
 
-export const getAllProduct = ( navigate, accessToken) => {
+export const getAllProduct = (navigate) => {
   try {
-    const res = instance.get("/product", {
-      headers: { token: `Bearer ${accessToken}`},
-    });
-    return res
+    const res = instance.get("/product");
+    return res;
   } catch (error) {
     console.log(error);
     navigate("/admin");
   }
 };
-export const getBySlug = (slug,dispatch, navigate, accessToken) => {
+export const getBySlug = (slug, dispatch, navigate, accessToken) => {
   try {
     const res = instance.get(`/product/${slug}`, {
-      headers: { token: `Bearer ${accessToken}`},
+      headers: { token: `Bearer ${accessToken}` },
     });
-    return res
+    return res;
   } catch (error) {
     console.log(error);
     navigate("/admin");
@@ -24,21 +22,21 @@ export const getBySlug = (slug,dispatch, navigate, accessToken) => {
 };
 export const createProduct = (formData, navigate, accessToken) => {
   try {
-    const res = instance.post("/product",formData, {
-      headers: { token: `Bearer ${accessToken}`},
+    const res = instance.post("/product", formData, {
+      headers: { token: `Bearer ${accessToken}` },
     });
-    return res
+    return res;
   } catch (error) {
     console.log(error);
     navigate("/admin/product");
   }
 };
-export const updateProduct = (id,formData, navigate, accessToken) => {
+export const updateProduct = (id, formData, navigate, accessToken) => {
   try {
-    const res = instance.put(`/product/edit/${id}`,formData, {
-      headers: { token: `Bearer ${accessToken}`},
+    const res = instance.put(`/product/edit/${id}`, formData, {
+      headers: { token: `Bearer ${accessToken}` },
     });
-    return res
+    return res;
   } catch (error) {
     console.log(error);
     navigate("/admin/product");
@@ -47,9 +45,9 @@ export const updateProduct = (id,formData, navigate, accessToken) => {
 export const deleteProduct = (id, navigate, accessToken) => {
   try {
     const res = instance.delete(`/product/${id}`, {
-      headers: { token: `Bearer ${accessToken}`},
+      headers: { token: `Bearer ${accessToken}` },
     });
-    return res
+    return res;
   } catch (error) {
     console.log(error);
     navigate("/admin/product");

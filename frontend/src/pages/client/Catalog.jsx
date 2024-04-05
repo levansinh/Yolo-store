@@ -4,9 +4,9 @@ import Button from "../../components/Button";
 import InfinityList from "../../components/InfinityList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
-import Helmet from '../../components/Hemet'
+import Helmet from "../../components/Hemet";
 
-// service 
+// service
 import * as productService from "../../service/productService";
 import * as categoryService from "../../service/categoryService";
 
@@ -18,40 +18,40 @@ function Catelog() {
   };
 
   const Color = [
-    {display:'Hồng',color:'pink'},
-    {display:'Đỏ',color:'red'},
-    {display:'Vàng',color:'yellow'},
-    {display:'Trắng',color:'white'},
-    {display:'Cam',color:'orange'},
-    {display:'Xanh dương',color:'blue'},
-]
+    { display: "Hồng", color: "pink" },
+    { display: "Đỏ", color: "red" },
+    { display: "Vàng", color: "yellow" },
+    { display: "Trắng", color: "white" },
+    { display: "Cam", color: "orange" },
+    { display: "Xanh dương", color: "blue" },
+  ];
 
-const Size = [
-  {display:'S',size:'s'},
-  {display:'M',size:'m'},
-  {display:'L',size:'L'},
-  {display:'XL',size:'xl'},
-  {display:'XXL',size:'xxl'},
-]
+  const Size = [
+    { display: "S", size: "s" },
+    { display: "M", size: "m" },
+    { display: "L", size: "L" },
+    { display: "XL", size: "xl" },
+    { display: "XXL", size: "xxl" },
+  ];
 
-const filterRef = useRef()
-const [filter, setFilter] = useState(initFilter);
-const [productList ,setProductList] = useState([])
-const [products, setProduct] = useState(productList);
-const [categoryList ,setCategoryList] =useState([])
+  const filterRef = useRef();
+  const [filter, setFilter] = useState(initFilter);
+  const [productList, setProductList] = useState([]);
+  const [products, setProduct] = useState(productList);
+  const [categoryList, setCategoryList] = useState([]);
 
-useEffect(()=>{
-  (async() => {
-    const res = await productService.getAllProduct()
-    setProductList(res.data.product)
-  })()
-},[])
-useEffect(()=>{
-  (async() => {
-    const res = await categoryService.getAllCategory()
-    setCategoryList(res.data.data)
-  })()
-},[categoryList])
+  useEffect(() => {
+    (async () => {
+      const res = await productService.getAllProduct();
+      setProductList(res.data.product);
+    })();
+  }, []);
+  useEffect(() => {
+    (async () => {
+      const res = await categoryService.getAllCategory();
+      setCategoryList(res.data.data);
+    })();
+  }, []);
 
   const filterSelect = (type, checked, item) => {
     if (checked) {
@@ -117,13 +117,13 @@ useEffect(()=>{
     updateProduct();
   }, [updateProduct]);
 
-  const toggleFilter = () => filterRef.current.classList.toggle('active')
+  const toggleFilter = () => filterRef.current.classList.toggle("active");
   return (
     <Helmet title="Catalog">
       <div className="catalog">
         <div className="catalog__fillter " ref={filterRef}>
           <div className="catalog__filter__close">
-            <FontAwesomeIcon icon={faClose} onClick={toggleFilter}/>
+            <FontAwesomeIcon icon={faClose} onClick={toggleFilter} />
           </div>
           <div className="catalog__fillter__widget">
             <div className="catalog__fillter__widget__title">
@@ -184,12 +184,18 @@ useEffect(()=>{
               </Button>
             </div>
           </div>
-
         </div>
-          <div className="catalog__fillter__toggle">
-            <Button primary onClick={() => {toggleFilter()}}>Bộ lọc</Button>  
-          </div>
-          <InfinityList data={products} />
+        <div className="catalog__fillter__toggle">
+          <Button
+            primary
+            onClick={() => {
+              toggleFilter();
+            }}
+          >
+            Bộ lọc
+          </Button>
+        </div>
+        <InfinityList data={products} />
       </div>
     </Helmet>
   );

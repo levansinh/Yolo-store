@@ -17,12 +17,12 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
 `;
+
 function Home() {
   const [productList, setProductList] = useState([]);
   useEffect(() => {
     (async () => {
       const res = await productService.getAllProduct();
-
       setProductList(res.data.product);
     })();
   }, []);
@@ -52,66 +52,64 @@ function Home() {
 
   return (
     <div>
-      <div className="product">
-        <Helmet title="Trang Chủ ">
-          <Slider
-            data={heroSliderData}
-            control={true}
-            auto={false}
-            timeOut={5000}
-          />
+      <Helmet title="Trang Chủ ">
+        <Slider
+          data={heroSliderData}
+          control={true}
+          auto={false}
+          timeOut={5000}
+        />
+        <Section>
+          <SectionBody>
+            <Grid col={4} mdCol={2} smCol={1} gap={20}>
+              {policy.map((item, index) => (
+                <Link key={index} to="/policy">
+                  <PolicyCard
+                    name={item.name}
+                    description={item.description}
+                    icon={item.icon}
+                  />
+                </Link>
+              ))}
+            </Grid>
+          </SectionBody>
+        </Section>
+        <Wrapper>
           <Section>
+            <SectionTitle>Sản phẩm bán chạy</SectionTitle>
             <SectionBody>
-              <Grid col={4} mdCol={2} smCol={1} gap={20}>
-                {policy.map((item, index) => (
-                  <Link key={index} to="/policy">
-                    <PolicyCard
-                      name={item.name}
-                      description={item.description}
-                      icon={item.icon}
-                    />
-                  </Link>
-                ))}
-              </Grid>
-            </SectionBody>
-          </Section>
-          <Wrapper>
-            <Section>
-              <SectionTitle>Sản phẩm bán chạy</SectionTitle>
-              <SectionBody>
-                <Grid col={4} smCol={1} mdCol={2} gap={40}>
-                  {getProducts(4, productList).map((item, index) => (
-                    <ProductCart
-                      key={index}
-                      image={item.image}
-                      title={item.title}
-                      slug={item.slug}
-                      price={Number(item.price)}
-                    />
-                  ))}
-                </Grid>
-              </SectionBody>
-            </Section>
-          </Wrapper>
-          {/* new arrival section */}
-          <Section>
-            <SectionTitle>sản phẩm mới</SectionTitle>
-            <SectionBody>
-              <Grid col={4} mdCol={2} smCol={1} gap={20}>
-                {getProducts(8, productList).map((item, index) => (
+              <Grid col={4} smCol={1} mdCol={2} gap={40}>
+                {getProducts(4, productList).map((item, index) => (
                   <ProductCart
                     key={index}
                     image={item.image}
-                    name={item.title}
-                    price={Number(item.price)}
+                    title={item.title}
                     slug={item.slug}
+                    price={Number(item.price)}
                   />
                 ))}
               </Grid>
             </SectionBody>
           </Section>
-        </Helmet>
-      </div>
+        </Wrapper>
+        {/* new arrival section */}
+        <Section>
+          <SectionTitle>sản phẩm mới</SectionTitle>
+          <SectionBody>
+            <Grid col={4} mdCol={2} smCol={1} gap={20}>
+              {getProducts(8, productList).map((item, index) => (
+                <ProductCart
+                  key={index}
+                  image={item.image}
+                  name={item.title}
+                  price={Number(item.price)}
+                  slug={item.slug}
+                />
+              ))}
+            </Grid>
+          </SectionBody>
+        </Section>
+      </Helmet>
     </div>
   );
 }

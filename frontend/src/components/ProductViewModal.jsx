@@ -29,22 +29,19 @@ const ProductViewModal = () => {
       );
       setProduct(res.data.product);
     })();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productSlug]);
   return (
-    <div className={`product-view__modal ${product === null ? '' : 'active'}`}>
-            <div className="product-view__modal__content">
-                <ProductView product={product}/>
-                <div className="product-view__modal__content__close">
-                    <Button
-                        size="sm"    
-                        onClick={() => dispatch(remove())}
-                    >
-                        đóng
-                    </Button>
-                </div>
-            </div>
+    <div className={`product-view__modal ${product === null ? "" : "active"}`}>
+      <div className="product-view__modal__content">
+        <ProductView product={product} />
+        <div className="product-view__modal__content__close">
+          <Button size="sm" onClick={() => dispatch(remove())}>
+            Đóng
+          </Button>
         </div>
+      </div>
+    </div>
   );
 };
 

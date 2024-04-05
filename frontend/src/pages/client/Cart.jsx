@@ -1,14 +1,36 @@
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableColumn,
+  TableRow,
+  TableCell,
+} from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import numberWithCommas from "../../util/covertPrice";
 import Helmet from "../../components/Hemet";
 import CartItem from "../../components/CartItem";
 import Button from "../../components/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
+import formatterPrice from "../../helpers/convertPrice";
 function Cart() {
   const cartItems = useSelector((state) => state.cartItems.value);
   console.log(cartItems);
   const [totalProduct, setTotalProduct] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const dispatch = useDispatch();
+
+  const [quantity, setQuantity] = useState(1);
+  const updateQuantity = (type) => {
+    if (type === "+") {
+      setQuantity(quantity + 1);
+    }
+    if (type === "-") {
+      setQuantity(quantity - 1);
+    }
+  };
   useEffect(() => {
     setTotalProduct(
       cartItems.reduce((total, item) => total + Number(item.quantity), 0)
@@ -39,40 +61,64 @@ function Cart() {
           </div>
         </div>
         <div className="cart__list">
-          <div class="relative overflow-x-auto">
-            <table class="w-full text-sm text-left text-[#333] ">
-              <thead class="text-xs w-full uppercase bg-[#5054b4] text-white">
-                <tr >
-                  <th scope="col" class="px-6 py-3 ">
-                    Tên sản phẩm
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Kích cỡ
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Màu sắc
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                   Hình ảnh
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Số lượng
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Giá tiền
-                  </th>
-                  <th scope="col" class="px-6 py-3"></th>
-                </tr>
-              </thead>
-              <tbody >
-               
-                  {cartItems.map((item, index) => (
-                    <CartItem key={index} item={item} />
-                  ))}
-                
-              </tbody>
-            </table>
-          </div>
+          <Table aria-label="Example table with dynamic content">
+            <TableHeader>
+              <TableColumn>STT</TableColumn>
+              <TableColumn> Tên sản phẩm</TableColumn>
+              <TableColumn> Kích cỡ</TableColumn>
+              <TableColumn> Màu sắc</TableColumn>
+              <TableColumn> Hình ảnh</TableColumn>
+              <TableColumn> Số lượng</TableColumn>
+              <TableColumn> Giá tiền</TableColumn>
+              <TableColumn>Hành động</TableColumn>
+            </TableHeader>
+            <TableBody>
+              {cartItems.map((item, index) => (
+                <TableRow key={item.key}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>
+                    <Link to={`/catalog/${item.slug}`}>
+                      <div className="">{item.title}</div>
+                    </Link>
+                  </TableCell>
+                  <TableCell>{item.size}</TableCell>
+                  <TableCell>{item.color}</TableCell>
+                  <TableCell>
+                    <img
+                      className="h-[100px] w-[150px]"
+                      src={item.image}
+                      alt=""
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center">
+                      <div
+                        className="product__info__item__quantity__btn"
+                        onClick={() => updateQuantity("-")}
+                      >
+                        <i className="bx bx-minus"></i>
+                      </div>
+                      <div className="product__info__item__quantity__input">
+                        {quantity}
+                      </div>
+                      <div
+                        className="product__info__item__quantity__btn"
+                        onClick={() => updateQuantity("+")}
+                      >
+                        <i className="bx bx-plus"></i>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    {formatterPrice.format(item.price * item.quantity)}
+                  </TableCell>
+                  <TableCell>
+                    {/* {formatterPrice.format(item.price * item.quantity)} */}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
       </div>
     </Helmet>

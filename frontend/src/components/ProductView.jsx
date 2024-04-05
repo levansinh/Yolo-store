@@ -5,13 +5,15 @@ import Button from "./Button";
 import { addItem } from "../redux/shopping-cart/cartItemSlice";
 import { useNavigate } from "react-router-dom";
 import { remove } from "../redux/product-modal/productModalSlice";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify";
+import formatterPrice from "../helpers/convertPrice";
 function ProductView(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let product = props.product;
- 
-    if (product === null) product = {
+
+  if (product === null)
+    product = {
       title: "",
       price: "",
       image: "",
@@ -20,7 +22,7 @@ function ProductView(props) {
       slug: "",
       size: [],
       description: "",
-  }
+    };
   const image01 =
     "https://ecdn.game4v.com/g4v-content/uploads/2022/09/25083529/Gojo-2-game4v-1664069728-55.jpg";
   const image02 =
@@ -55,7 +57,7 @@ function ProductView(props) {
         slug: product.slug,
         color: color,
         size: size,
-        image:previewImg,
+        image: previewImg,
         price: product.price,
         quantity: quantity,
       };
@@ -128,7 +130,9 @@ function ProductView(props) {
       <div className="product__info">
         <h1 className="product__info__title">{product?.title}</h1>
         <div className="product__info__item">
-          <span className="product__info__item__price">{(product?.price)}</span>
+          <span className="product__info__item__price">
+            {formatterPrice.format(product?.price)}
+          </span>
         </div>
         <div className="product__info__item">
           <div className="product__info__item__title">Kích cỡ</div>
@@ -187,24 +191,26 @@ function ProductView(props) {
         </div>
         <div className="product__info__item">
           <div className="product__info__item__title">Đặt hàng</div>
-          <Button
-            primary
-            onClick={() => {
-              addToCart();
-              dispatch(remove());
-            }}
-          >
-            Thêm vào giỏ hàng
-          </Button>
-          <Button
-            primary
-            onClick={() => {
-              goToCart();
-              dispatch(remove());
-            }}
-          >
-            Mua sản phẩm
-          </Button>
+          <div className="flex items-center ">
+            <Button
+              primary
+              onClick={() => {
+                addToCart();
+                dispatch(remove());
+              }}
+            >
+              Thêm vào giỏ hàng
+            </Button>
+            <Button
+              primary
+              onClick={() => {
+                goToCart();
+                dispatch(remove());
+              }}
+            >
+              Mua sản phẩm
+            </Button>
+          </div>
         </div>
       </div>
     </div>

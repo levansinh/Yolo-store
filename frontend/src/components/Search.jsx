@@ -7,7 +7,7 @@ import * as productService from "../service/productService";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import useDebounce from "../hook/useDebounced";
-import ListSearchItem from "../components/ListSearchItem"
+import ListSearchItem from "../components/ListSearchItem";
 function Search() {
   const [showResult, setShowResult] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
@@ -40,10 +40,8 @@ function Search() {
 
   const renderResult = () => {
     return (
-      <div className="w-300px border-[#4267b2] border-solid border-[1px] z-20 bg-zinc-100">
-        <ListSearchItem
-          list={searchResult}
-        />
+      <div className="w-300px z-50 border-[#4267b2] bg-zinc-100">
+        <ListSearchItem list={searchResult} />
       </div>
     );
   };
@@ -68,24 +66,24 @@ function Search() {
       onClickOutside={handleHideResult}
     >
       <div className="relative bg-white border-[#4267b2] border-solid border-[1px] flex gap-x-3 items-center w-[300px] rounded-md">
-       {!searchValue &&
-         <span className="absolute top-0 right-0 bottom-0 flex items-center justify-center px-[8px] cursor-pointer text-[#2564cf] hover:bg-[rgba(0,0,0,0.05)] transition-colors">
-         <FontAwesomeIcon icon={faSearch} />
-       </span>
-       }
+        {!searchValue && (
+          <span className="absolute top-0 right-0 bottom-0 flex items-center justify-center px-[8px] cursor-pointer text-[#2564cf] hover:bg-[rgba(0,0,0,0.05)] transition-colors">
+            <FontAwesomeIcon icon={faSearch} />
+          </span>
+        )}
         <input
           type="text"
           value={searchValue}
           ref={inputRef}
           spellCheck={false}
           placeholder="Tìm kiếm ..."
-          className="text-black w-[250px] pl-[20px] texl-sm outline-0 bg-transparent"
+          className="text-black w-[250px] h-[40px] text-lg pl-[20px] texl-sm outline-0 bg-transparent"
           onChange={handleOnChangeInput}
           onFocus={() => setShowResult(true)}
         />
         {searchValue && (
           <span
-            className="absolute top-0 bottom-0 right-0 flex items-center justify-center px-[8px] cursor-pointer text-[#2564cf] hover:bg-[rgba(0,0,0,0.05)] transition-colors"
+            className="absolute top-0 bottom-0 right-0 text-lg flex items-center justify-center px-[8px] cursor-pointer text-[#2564cf] hover:bg-[rgba(0,0,0,0.05)] transition-colors"
             onClick={handleClear}
           >
             <FontAwesomeIcon icon={faCircleXmark} />
