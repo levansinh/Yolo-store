@@ -19,14 +19,14 @@ function InfinityList(props) {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-        if (listRef && listRef.current) {
-          if (
-            window.scrollY + window.innerHeight >=
-            listRef.current.clientHeight + listRef.current.offsetTop + 200
-          ) {
-            setLoad(true);
-          }
+      if (listRef && listRef.current) {
+        if (
+          window.scrollY + window.innerHeight >=
+          listRef.current.clientHeight + listRef.current.offsetTop + 200
+        ) {
+          setLoad(true);
         }
+      }
     });
   }, [listRef]);
 
@@ -48,23 +48,16 @@ function InfinityList(props) {
   }, [load, index, data, props.data]);
   return (
     <div className="catalog__content" ref={listRef}>
-      <div className="">
-        <Grid
-        col={3}
-        mdCol={2}
-        smCol={1}
-        gap={20}
-        >
+      <div className="flex items-center justify-between">
         {data.map((item, index) => (
-            <ProductCart
+          <ProductCart
             key={index}
-              image={item.image}
-              title={item.title}
-              slug={item.slug}
-              price={Number(item.price)}
-            />
-            ))}
-            </Grid >
+            image={item.image}
+            title={item.title}
+            slug={item.slug}
+            price={Number(item.price)}
+          />
+        ))}
       </div>
     </div>
   );

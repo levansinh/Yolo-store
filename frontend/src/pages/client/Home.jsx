@@ -78,7 +78,7 @@ function Home() {
           <Section>
             <SectionTitle>Sản phẩm bán chạy</SectionTitle>
             <SectionBody>
-              <Grid col={4} smCol={1} mdCol={2} gap={40}>
+              <div className="flex align-items-center">
                 {getProducts(4, productList).map((item, index) => (
                   <ProductCart
                     key={index}
@@ -88,7 +88,7 @@ function Home() {
                     price={Number(item.price)}
                   />
                 ))}
-              </Grid>
+              </div>
             </SectionBody>
           </Section>
         </Wrapper>
@@ -96,7 +96,7 @@ function Home() {
         <Section>
           <SectionTitle>sản phẩm mới</SectionTitle>
           <SectionBody>
-            <Grid col={4} mdCol={2} smCol={1} gap={20}>
+            <div className="flex items-center justify-between">
               {getProducts(8, productList).map((item, index) => (
                 <ProductCart
                   key={index}
@@ -106,7 +106,7 @@ function Home() {
                   slug={item.slug}
                 />
               ))}
-            </Grid>
+            </div>
           </SectionBody>
         </Section>
       </Helmet>

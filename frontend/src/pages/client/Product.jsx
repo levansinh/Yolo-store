@@ -48,7 +48,7 @@ function Product(props) {
       <Section>
         <SectionTitle>Khám phá thêm</SectionTitle>
         <SectionBody>
-          <Grid col={4} smCol={1} mdCol={2} gap={20}>
+          <div className="flex items-center justify-between">
             {productList.map((item, index) => (
               <ProductCart
                 key={index}
@@ -58,7 +58,7 @@ function Product(props) {
                 price={Number(item.price)}
               />
             ))}
-          </Grid>
+          </div>
         </SectionBody>
       </Section>
     </Helmet>
